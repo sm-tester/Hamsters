@@ -10,6 +10,8 @@ import com.unrealmojo.hamsters.R;
 import com.unrealmojo.hamsters.databinding.HamstersFragmentBinding;
 import com.unrealmojo.hamsters.helpers.CharacterItemDecaration;
 import com.unrealmojo.hamsters.helpers.Utilities;
+import com.unrealmojo.hamsters.models.Hamster;
+import com.unrealmojo.hamsters.ui.hamsters.detail.HamsterDetailFragment;
 
 import java.util.ArrayList;
 
@@ -96,5 +98,15 @@ public class HamstersFragment extends Fragment implements SwipeRefreshLayout.OnR
                     onRefresh();
                 })
                 .show();
+    }
+
+    void onItemClicked(Hamster hamster) {
+        Bundle arg = new Bundle();
+        arg.putParcelable("hamster", hamster);
+
+        HamsterDetailFragment detailFragment = new HamsterDetailFragment();
+        detailFragment.setArguments(arg);
+
+        detailFragment.show(getChildFragmentManager(), "HamsterDetailFragment");
     }
 }

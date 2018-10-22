@@ -1,8 +1,11 @@
 package com.unrealmojo.hamsters.models;
 
-public class Hamster implements Comparable{
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Hamster implements Comparable, Parcelable {
     private String title;
-    private String desc;
+    private String description;
     private boolean pinned;
     private String image;
 
@@ -15,11 +18,11 @@ public class Hamster implements Comparable{
     }
 
     public String getDesc() {
-        return desc;
+        return description;
     }
 
     public void setDesc(String desc) {
-        this.desc = desc;
+        this.description = desc;
     }
 
     public boolean isPinned() {
@@ -42,7 +45,7 @@ public class Hamster implements Comparable{
     public String toString() {
         return "Hamster{" +
                 "title='" + title + '\'' +
-                ", desc='" + desc + '\'' +
+                ", desc='" + description + '\'' +
                 ", pinned=" + pinned +
                 ", image='" + image + '\'' +
                 '}';
@@ -55,4 +58,39 @@ public class Hamster implements Comparable{
         else if (right.isPinned()) return -1;
         return 0;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.title);
+        dest.writeString(this.description);
+        dest.writeByte(this.pinned ? (byte) 1 : (byte) 0);
+        dest.writeString(this.image);
+    }
+
+    public Hamster() {
+    }
+
+    protected Hamster(Parcel in) {
+        this.title = in.readString();
+        this.description = in.readString();
+        this.pinned = in.readByte() != 0;
+        this.image = in.readString();
+    }
+
+    public static final Parcelable.Creator<Hamster> CREATOR = new Parcelable.Creator<Hamster>() {
+        @Override
+        public Hamster createFromParcel(Parcel source) {
+            return new Hamster(source);
+        }
+
+        @Override
+        public Hamster[] newArray(int size) {
+            return new Hamster[size];
+        }
+    };
 }

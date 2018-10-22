@@ -63,13 +63,17 @@ public class HamstersListAdapter extends RecyclerView.Adapter<HamstersListAdapte
         ViewHolder(@NonNull HamstersListItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+
+            binding.getRoot().setOnClickListener(view -> {
+                mPage.onItemClicked(mData.get(getAdapterPosition()));
+            });
         }
 
         void bindData(Hamster data) {
             Picasso.get()
                     .load(data.getImage())
                     .placeholder(R.drawable.ic_image_not_found)
-                    .resize(Utilities.dp(imageWidth), (int) imageHeight)
+                    .resize((int) imageWidth, (int) imageHeight)
                     .centerCrop()
                     .into(binding.itemIV);
 

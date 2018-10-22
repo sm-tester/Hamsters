@@ -4,4 +4,5 @@
     <string name="refresh_txt">Refresh</string>
     <string name="offline_mode_txt">You\'re in offline mode, please check internet connection and try again</string>
     <string name="offline_txt">No internet connection</string>
+    <string name="share_txt">Share hamster image</string>
 </resources>
