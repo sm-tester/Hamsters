@@ -1,4 +1,4 @@
-package com.unrealmojo.hamsters.helpers;
+package com.unrealmojo.hamsters.helpers.customs;
 
 import android.graphics.Rect;
 import android.view.View;

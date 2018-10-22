@@ -1,4 +1,4 @@
-package com.unrealmojo.hamsters.helpers;
+package com.unrealmojo.hamsters.helpers.customs;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;

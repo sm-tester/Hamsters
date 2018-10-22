@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import com.google.android.material.snackbar.Snackbar;
 import com.unrealmojo.hamsters.R;
 import com.unrealmojo.hamsters.databinding.HamstersFragmentBinding;
-import com.unrealmojo.hamsters.helpers.CharacterItemDecaration;
+import com.unrealmojo.hamsters.helpers.customs.CharacterItemDecaration;
 import com.unrealmojo.hamsters.helpers.Utilities;
 import com.unrealmojo.hamsters.models.Hamster;
 import com.unrealmojo.hamsters.ui.hamsters.detail.HamsterDetailFragment;
@@ -20,7 +20,6 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 

@@ -16,7 +16,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.squareup.picasso.Picasso;
 import com.unrealmojo.hamsters.R;
 import com.unrealmojo.hamsters.databinding.HamsterDetailFragmentBinding;
-import com.unrealmojo.hamsters.helpers.RoundedCornersTransformation;
+import com.unrealmojo.hamsters.helpers.customs.RoundedCornersTransformation;
 import com.unrealmojo.hamsters.helpers.Utilities;
 import com.unrealmojo.hamsters.models.Hamster;
 

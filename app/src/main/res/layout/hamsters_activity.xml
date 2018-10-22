@@ -30,12 +30,12 @@
                     android:background="?attr/colorPrimary"
                     app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-                <!--<include-->
-                <!--android:id="@+id/searchWidget"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="?attr/actionBarSize"-->
-                <!--layout="@layout/widget_search_bar"-->
-                <!--/>-->
+                <include
+                    android:id="@+id/searchWidget"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    layout="@layout/widget_search_bar"
+                    />
             </FrameLayout>
 
         </com.google.android.material.appbar.AppBarLayout>

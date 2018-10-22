@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view
+    class="com.unrealmojo.hamsters.helpers.customs.SearchViewLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/search_view_container"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:layout_margin="0dp"
+    android:padding="0dp"
+    android:orientation="horizontal"
+    android:clipToPadding="false"
+    android:clipChildren="false"
+    android:visibility="gone"
+    >
+
+    <LinearLayout
+        android:id="@+id/search_root"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/search_back_button"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/ic_arrow_back_white_24dp"
+            android:background="?attr/selectableItemBackgroundBorderless" />
+
+        <EditText
+            android:id="@+id/search_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="@string/search_txt"
+            android:textSize="15sp"
+            android:textColor="#ffffff"
+            android:textColorHint="#90ffffff"
+            android:textCursorDrawable="@drawable/edittext_cursor"
+            android:background="@null"
+            android:inputType="textFilter"
+            android:singleLine="true"
+            android:imeOptions="actionSearch" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/search_clear_button"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/ic_clear_white_24dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:visibility="invisible"
+            />
+    </LinearLayout>
+</view>
