@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="hamster"
+            type="com.unrealmojo.hamsters.models.Hamster"
+            />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainItemLay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        android:background="@android:color/white"
+        >
+
+        <ImageView
+            android:id="@+id/itemIV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toTopOf="@+id/itemTitleTV"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@sample/hamster" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/pinnedFlagIV"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:padding="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/itemIV"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/ic_oval_white_background"
+            app:srcCompat="@drawable/ic_pin_red"
+            android:visibility="@{hamster.pinned ? View.VISIBLE : View.INVISIBLE}"
+            />
+
+        <TextView
+            android:id="@+id/itemTitleTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@{hamster.title, default=@string/app_name}"
+            android:textColor="#8a000000"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/itemIV" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
