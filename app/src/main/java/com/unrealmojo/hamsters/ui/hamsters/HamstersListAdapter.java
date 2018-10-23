@@ -1,6 +1,9 @@
 package com.unrealmojo.hamsters.ui.hamsters;
 
+import android.text.TextUtils;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import com.squareup.picasso.Picasso;
 import com.unrealmojo.hamsters.R;
@@ -8,21 +11,25 @@ import com.unrealmojo.hamsters.databinding.HamstersListItemBinding;
 import com.unrealmojo.hamsters.helpers.Utilities;
 import com.unrealmojo.hamsters.models.Hamster;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class HamstersListAdapter extends RecyclerView.Adapter<HamstersListAdapter.ViewHolder> {
+public class HamstersListAdapter extends RecyclerView.Adapter<HamstersListAdapter.ViewHolder> implements Filterable {
     private List<Hamster> mData;
+    private List<Hamster> mOriginalData;
     private HamstersFragment mPage;
     private float imageWidth;
     private float imageHeight;
+    private boolean isDataFiltered = false;
 
     public HamstersListAdapter(HamstersFragment fragment, List<Hamster> mData) {
         this.mPage = fragment;
         this.mData = mData;
+        this.mOriginalData = mData;
 
         this.imageWidth = (Utilities.getDisplaySize(mPage.getContext()).x - Utilities.dp(46)) / 2;
 
@@ -54,7 +61,55 @@ public class HamstersListAdapter extends RecyclerView.Adapter<HamstersListAdapte
 
     public void submitData(List<Hamster> data) {
         mData = data;
+        mOriginalData = data;
         notifyDataSetChanged();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                FilterResults filterResults = new FilterResults();
+
+                if (!TextUtils.isEmpty(constraint)) {
+                    String key = constraint.toString().toLowerCase();
+                    ArrayList<Hamster> data = new ArrayList<>();
+                    for (Hamster hamster : mData) {
+                        if (hamster.getTitle().contains(key)) {
+                            data.add(hamster);
+                        }
+                    }
+
+                    if (data.size() > 0) {
+                        filterResults.values = data;
+                        filterResults.count = data.size();
+                    }
+                }
+
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                if (results.count > 0) {
+                    mData = (List<Hamster>) results.values;
+                    isDataFiltered = true;
+                    notifyDataSetChanged();
+                    return;
+                }
+
+                showOriginal();
+            }
+        };
+    }
+
+    public void showOriginal() {
+        if (isDataFiltered) {
+            mData = mOriginalData;
+            notifyDataSetChanged();
+        }
+        isDataFiltered = false;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

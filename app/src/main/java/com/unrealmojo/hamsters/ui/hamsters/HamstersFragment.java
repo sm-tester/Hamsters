@@ -2,6 +2,7 @@ package com.unrealmojo.hamsters.ui.hamsters;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -104,11 +105,32 @@ public class HamstersFragment extends BaseFragment implements SwipeRefreshLayout
         searchBar = getActivity().findViewById(R.id.searchBar);
 
         searchBar.setCollapseListener(() -> {
-
+            mAdapter.showOriginal();
         });
 
         searchBar.setCleanListener(() -> {
+            mAdapter.showOriginal();
+        });
 
+        searchBar.setSearchListener(searchKeyword -> {
+            mAdapter.getFilter().filter(searchKeyword);
+        });
+
+        searchBar.setSearchBoxListener(new SearchViewLayout.SearchBoxListener() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                mAdapter.getFilter().filter(s.toString());
+            }
         });
     }
 
