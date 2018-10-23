@@ -31,7 +31,7 @@
                     app:popupTheme="@style/AppTheme.PopupOverlay" />
 
                 <include
-                    android:id="@+id/searchWidget"
+                    android:id="@+id/searchBar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     layout="@layout/widget_search_bar"
