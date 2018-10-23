@@ -1,6 +1,7 @@
 package com.unrealmojo.hamsters.helpers;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -18,6 +19,7 @@ public class Utilities {
     private static final String TAG = Utilities.class.getSimpleName();
 
     private static float density = 1f;
+    public String versionName = "1.0";
 
     private static Utilities ourInstance = new Utilities();
 
@@ -29,6 +31,12 @@ public class Utilities {
 
     public void init(Context context) {
         density = context.getResources().getDisplayMetrics().density;
+
+        try {
+            versionName = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public static Point getDisplaySize(Context context) {

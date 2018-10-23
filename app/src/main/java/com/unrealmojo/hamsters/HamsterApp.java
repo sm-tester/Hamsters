@@ -1,7 +1,9 @@
 package com.unrealmojo.hamsters;
 
 import android.app.Application;
+import android.os.Build;
 import android.os.Handler;
+import android.util.Log;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.interceptors.HttpLoggingInterceptor;
@@ -23,6 +25,7 @@ public class HamsterApp extends Application {
         appHandler = new Handler(getMainLooper());
 
         Utilities.object().init(this);
+
         initNetworkServices();
     }
 
