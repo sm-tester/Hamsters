@@ -1,6 +1,7 @@
 package com.unrealmojo.hamsters.ui.hamsters;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -12,6 +13,7 @@ import com.unrealmojo.hamsters.helpers.Utilities;
 import com.unrealmojo.hamsters.models.Hamster;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -60,6 +62,7 @@ public class HamstersListAdapter extends RecyclerView.Adapter<HamstersListAdapte
     }
 
     public void submitData(List<Hamster> data) {
+        Collections.sort(data);
         mData = data;
         mOriginalData = data;
         notifyDataSetChanged();
@@ -94,6 +97,7 @@ public class HamstersListAdapter extends RecyclerView.Adapter<HamstersListAdapte
             protected void publishResults(CharSequence constraint, FilterResults results) {
                 if (results.count > 0) {
                     mData = (List<Hamster>) results.values;
+                    Collections.sort(mData);
                     isDataFiltered = true;
                     notifyDataSetChanged();
                     return;

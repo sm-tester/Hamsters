@@ -54,8 +54,8 @@ public class Hamster implements Comparable, Parcelable {
     @Override
     public int compareTo(Object o) {
         Hamster right = (Hamster) o;
-        if (isPinned() && !right.isPinned()) return 1;
-        else if (right.isPinned()) return -1;
+        if (isPinned() && !right.isPinned()) return -1;
+        else if (right.isPinned()) return 1;
         return 0;
     }
 
