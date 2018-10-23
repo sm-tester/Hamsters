@@ -240,6 +240,7 @@ public class SearchViewLayout extends FrameLayout {
 //        mCollapsedHeight = getHeight();
         toggleToolbar(true);
         mIsExpanded = true;
+        setVisibility(View.VISIBLE);
 
         if (requestFocus) {
             mSearchEditText.requestFocus();
@@ -251,6 +252,9 @@ public class SearchViewLayout extends FrameLayout {
 
         mSearchEditText.setText(null);
         mIsExpanded = false;
+        setVisibility(View.GONE);
+
+        if (mCollapseListener != null) mCollapseListener.collapse();
     }
 
     public boolean isExpanded() {

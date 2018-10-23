@@ -133,7 +133,7 @@ public class HamstersFragment extends BaseFragment implements SwipeRefreshLayout
         searchBar.setTransitionDrawables(collapsed, expanded);
 
         searchBar.setCollapseListener(() -> {
-            searchBar.setVisibility(View.GONE);
+
         });
 
         searchBar.setCleanListener(() -> {

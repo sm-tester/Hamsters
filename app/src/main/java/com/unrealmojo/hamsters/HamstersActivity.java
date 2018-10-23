@@ -7,13 +7,14 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.unrealmojo.hamsters.databinding.HamstersActivityBinding;
 import com.unrealmojo.hamsters.ui.base.BaseFragment;
 import com.unrealmojo.hamsters.ui.developer.DeveloperFragment;
 import com.unrealmojo.hamsters.ui.hamsters.HamstersFragment;
 
-public class HamstersActivity extends AppCompatActivity implements HamstersActivityViewModel.InteractActions {
+public class HamstersActivity extends BaseActivity implements HamstersActivityViewModel.InteractActions {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,18 @@ public class HamstersActivity extends AppCompatActivity implements HamstersActiv
 
         if (savedInstanceState == null) {
             openPage(1, false, null);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                disableBackBtn();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
@@ -56,7 +69,7 @@ public class HamstersActivity extends AppCompatActivity implements HamstersActiv
         if (needBackStack) ft.addToBackStack(mCurrFrag.pageTag());
 
         try {
-            ft.commitNow();
+            ft.commitAllowingStateLoss();
         }
         catch (Exception e) {
             e.printStackTrace();
