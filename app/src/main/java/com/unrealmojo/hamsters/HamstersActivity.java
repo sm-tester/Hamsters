@@ -1,29 +1,28 @@
 package com.unrealmojo.hamsters;
 
-import androidx.databinding.DataBindingUtil;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.os.Bundle;
-import android.view.MenuItem;
 
 import com.unrealmojo.hamsters.databinding.HamstersActivityBinding;
+import com.unrealmojo.hamsters.helpers.customs.SearchViewLayout;
 import com.unrealmojo.hamsters.ui.base.BaseFragment;
 import com.unrealmojo.hamsters.ui.developer.DeveloperFragment;
 import com.unrealmojo.hamsters.ui.hamsters.HamstersFragment;
 
-public class HamstersActivity extends BaseActivity implements HamstersActivityViewModel.InteractActions {
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProviders;
+
+public class HamstersActivity extends AppCompatActivity implements HamstersActivityViewModel.InteractActions {
+
+    private HamstersActivityBinding UI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        HamstersActivityBinding UI = DataBindingUtil
+        UI = DataBindingUtil
                 .setContentView(this, R.layout.hamsters_activity);
-
-        setSupportActionBar(UI.toolbar);
 
         HamstersActivityViewModel viewModel = ViewModelProviders.of(this)
                 .get(HamstersActivityViewModel.class);
@@ -32,18 +31,20 @@ public class HamstersActivity extends BaseActivity implements HamstersActivityVi
         if (savedInstanceState == null) {
             openPage(1, false, null);
         }
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                disableBackBtn();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+        UI.toolbar.setTitle(R.string.app_name);
+
+        UI.toolbar.setBackListener(view -> {
+            onBackPressed();
+        });
+
+        UI.toolbar.setSearchListener(view -> {
+            ((SearchViewLayout) UI.searchBar).expand(true);
+        });
+
+        UI.toolbar.setDevListener(view -> {
+            openPage(2, true, null);
+        });
     }
 
     @Override
@@ -54,6 +55,8 @@ public class HamstersActivity extends BaseActivity implements HamstersActivityVi
                 mCurrFrag = HamstersFragment.newInstance(args);
                 break;
             case 2:
+                UI.toolbar.hideAllMenu();
+                UI.toolbar.showBackBtn();
                 mCurrFrag = DeveloperFragment.newInstance(args);
                 break;
             default:

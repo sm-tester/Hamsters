@@ -5,10 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.unrealmojo.hamsters.BaseActivity;
-import com.unrealmojo.hamsters.HamstersActivity;
 import com.unrealmojo.hamsters.R;
 import com.unrealmojo.hamsters.databinding.DeveloperFragmentBinding;
+import com.unrealmojo.hamsters.helpers.customs.SmartToolbar;
 import com.unrealmojo.hamsters.ui.base.BaseFragment;
 
 import androidx.annotation.NonNull;
@@ -43,6 +42,9 @@ public class DeveloperFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ((BaseActivity) getActivity()).enableWhiteBackButton();
+
+        SmartToolbar toolbar = getActivity().findViewById(R.id.toolbar);
+        toolbar.hideAllMenu();
+        toolbar.showBackBtn();
     }
 }

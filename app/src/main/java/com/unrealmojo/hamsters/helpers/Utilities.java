@@ -6,7 +6,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.DisplayMetrics;
 import android.view.Display;
+import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 import java.util.Collection;
 
@@ -89,5 +91,23 @@ public class Utilities {
 
     public static boolean IsEmpty(LiveData liveData) {
         return liveData == null || liveData.getValue() == null;
+    }
+
+    public static boolean showInputMethod(View view) {
+        final InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(
+                Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            return imm.showSoftInput(view, 0);
+        }
+        return false;
+    }
+
+    public static boolean hideInputMethod(View view) {
+        final InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(
+                Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            return imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+        return false;
     }
 }

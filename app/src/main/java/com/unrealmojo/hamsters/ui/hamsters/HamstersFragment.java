@@ -16,6 +16,7 @@ import com.unrealmojo.hamsters.databinding.HamstersFragmentBinding;
 import com.unrealmojo.hamsters.helpers.customs.CharacterItemDecaration;
 import com.unrealmojo.hamsters.helpers.Utilities;
 import com.unrealmojo.hamsters.helpers.customs.SearchViewLayout;
+import com.unrealmojo.hamsters.helpers.customs.SmartToolbar;
 import com.unrealmojo.hamsters.models.Hamster;
 import com.unrealmojo.hamsters.ui.base.BaseFragment;
 import com.unrealmojo.hamsters.ui.hamsters.detail.HamsterDetailFragment;
@@ -64,14 +65,12 @@ public class HamstersFragment extends BaseFragment implements SwipeRefreshLayout
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
-
-    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        SmartToolbar toolbar = getActivity().findViewById(R.id.toolbar);
+        toolbar.hideBackBtn();
+        toolbar.showAllMenu();
 
         mViewModel = ViewModelProviders.of(this).get(HamstersViewModel.class);
 
@@ -101,36 +100,8 @@ public class HamstersFragment extends BaseFragment implements SwipeRefreshLayout
         setupSearchBar();
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.hamsters_page_menu, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.searchMenuBtn:
-                searchBar.expand(true);
-                return true;
-            case R.id.devMenuBtn:
-                HamstersActivityViewModel viewModel = ViewModelProviders.of(getActivity())
-                        .get(HamstersActivityViewModel.class);
-                viewModel.interactActions.openPage(2, true, null);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
     private void setupSearchBar() {
         searchBar = getActivity().findViewById(R.id.searchBar);
-
-        ColorDrawable collapsed = new ColorDrawable(
-                ContextCompat.getColor(getContext(), android.R.color.transparent));
-        ColorDrawable expanded = new ColorDrawable(
-                ContextCompat.getColor(getContext(), android.R.color.white));
-        searchBar.setTransitionDrawables(collapsed, expanded);
 
         searchBar.setCollapseListener(() -> {
 

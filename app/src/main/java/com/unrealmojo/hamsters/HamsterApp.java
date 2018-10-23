@@ -6,6 +6,7 @@ import android.os.Handler;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.interceptors.HttpLoggingInterceptor;
 import com.squareup.picasso.Picasso;
+import com.unrealmojo.hamsters.helpers.Utilities;
 
 import java.util.concurrent.TimeUnit;
 
@@ -18,7 +19,10 @@ public class HamsterApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
         appHandler = new Handler(getMainLooper());
+
+        Utilities.object().init(this);
         initNetworkServices();
     }
 
